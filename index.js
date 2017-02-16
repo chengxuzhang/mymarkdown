@@ -60,7 +60,7 @@ var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
     var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
       mode: 'gfm',
-      lineNumbers: false,
+      lineNumbers: true,
       matchBrackets: true,
       lineWrapping: true,
       theme: 'base16-light',
