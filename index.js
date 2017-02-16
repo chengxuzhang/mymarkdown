@@ -69,10 +69,6 @@ var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
     editor.on('change', update);
 
-
-
-
-
     document.addEventListener('drop', function(e){
       e.preventDefault();
       e.stopPropagation();
@@ -161,9 +157,6 @@ var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
         return false;
       }
     });
-
-
-
 
     function updateHash(){
       window.location.hash = btoa( // base64 so url-safe
