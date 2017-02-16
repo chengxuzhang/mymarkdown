@@ -1,10 +1,32 @@
-var obj = document.getElementById("tool-bold");
+var bold = document.getElementById("tool-bold");
+var code = document.getElementById("tool-code");
+var iocnchexiao = document.getElementById("tool-iocnchexiao");
+var chexiao = document.getElementById("tool-chexiao");
+var yy = document.getElementById("tool-yy");
 
-var s = '\
+var bold_str = '**code**';
+var code_str = '\
 ```\n\
-fajlsdkfj\n\
+code\n\
 ```';
+var yy_str = '> code';
 
-obj.onclick = function(){
-	editor.replaceSelection(s);
+bold.onclick = function(){
+	editor.replaceSelection(bold_str);
+}
+
+code.onclick = function(){
+	editor.replaceSelection(code_str);
+}
+
+iocnchexiao.onclick = function(){
+	editor.undo();
+}
+
+chexiao.onclick = function(){
+	editor.redo();
+}
+
+yy.onclick = function(){
+	editor.replaceSelection(yy_str);
 }
