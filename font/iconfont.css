@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1487220110290'); /* IE9*/
-  src: url('iconfont.eot?t=1487220110290#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1487220110290') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1487220110290') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1487220110290#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1487300401044'); /* IE9*/
+  src: url('iconfont.eot?t=1487300401044#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1487300401044') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1487300401044') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1487300401044#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -15,29 +15,39 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-tupian:before { content: "\343e"; }
+.icon-image:before { content: "\343e"; }
 
-.icon-yinyong:before { content: "\e620"; }
+.icon-quote:before { content: "\e620"; }
 
-.icon-xieti:before { content: "\e73d"; }
+.icon-table:before { content: "\e621"; }
 
-.icon-shuziliebiao:before { content: "\e7a4"; }
+.icon-italic:before { content: "\e73d"; }
 
-.icon-icon-liebiao:before { content: "\e618"; }
+.icon-ul:before { content: "\e7a4"; }
 
-.icon-iocnchexiao:before { content: "\e60a"; }
+.icon-ol:before { content: "\e618"; }
 
-.icon-chexiao:before { content: "\e716"; }
+.icon-cancel:before { content: "\e60a"; }
 
-.icon-lianjie:before { content: "\e70f"; }
+.icon-sure:before { content: "\e716"; }
 
-.icon-wenhao:before { content: "\e645"; }
+.icon-link:before { content: "\e70f"; }
+
+.icon-question:before { content: "\e645"; }
+
+.icon-right:before { content: "\e605"; }
+
+.icon-left:before { content: "\e66a"; }
 
 .icon-hr:before { content: "\e61a"; }
 
-.icon-ai-code:before { content: "\e606"; }
+.icon-full-screen:before { content: "\e65d"; }
 
-.icon-biaoti:before { content: "\e603"; }
+.icon-code:before { content: "\e606"; }
 
-.icon-jiacu:before { content: "\e624"; }
+.icon-edit-view:before { content: "\e79f"; }
+
+.icon-title:before { content: "\e603"; }
+
+.icon-bold:before { content: "\e624"; }
 
