@@ -1,10 +1,10 @@
-var toollists = ['bold', 'italic', '|', 'link', 'quote', 'code', 'image', '|', 'ul', 'ol', 'title', 'hr', 'table', '|', 'cancel', 'sure', '|', 'question', 'full-screen'];
+var toollists = ['bold', 'italic', '|', 'link', 'quote', 'code', 'image', '|', 'ul', 'ol', 'title', 'hr', 'table', '|', 'cancel', 'sure', '|', 'question', 'left', 'edit-view', 'right', 'full-screen'];
 
 var toolbarDiv = document.createElement("div");
 toolbarDiv.className = "toolsbar";
 var toolUl = document.createElement("ul");
 var toolLiRight = document.createElement("li");
-toolLiRight.setAttribute("style","float:right;");
+toolLiRight.setAttribute("style","float:right;width:auto !important;");
 var toolLiRightUl = document.createElement("ul");
 toolLiRight.appendChild(toolLiRightUl);
 toolUl.appendChild(toolLiRight);
@@ -211,6 +211,39 @@ for (var i = 0; i < toollists.length; i++) {
 				document.getElementById("markdown-editor").setAttribute("style","");
 				status = 0;	
 			}
+		}
+		toolLiRightUl.appendChild(toolLi);
+	}
+	if(toollists[i] == "left"){
+		var toolLi = document.createElement("li");
+		toolLi.className = "tool tool-left";
+		toolLi.setAttribute("title","预览");
+		toolLi.innerHTML = '<span class="iconfont icon-left"></span>';
+		toolLi.onclick = function(){
+			document.getElementById("out").setAttribute("style","left:0;");
+			document.getElementById("in").setAttribute("style","width:0;");
+		}
+		toolLiRightUl.appendChild(toolLi);
+	}
+	if(toollists[i] == "right"){
+		var toolLi = document.createElement("li");
+		toolLi.className = "tool tool-right";
+		toolLi.setAttribute("title","编辑");
+		toolLi.innerHTML = '<span class="iconfont icon-right"></span>';
+		toolLi.onclick = function(){
+			document.getElementById("out").setAttribute("style","left:100%;display:none;");
+			document.getElementById("in").setAttribute("style","width:100%;border-right:1px solid #eee;");
+		}
+		toolLiRightUl.appendChild(toolLi);
+	}
+	if(toollists[i] == "edit-view"){
+		var toolLi = document.createElement("li");
+		toolLi.className = "tool tool-edit-view";
+		toolLi.setAttribute("title","编辑预览");
+		toolLi.innerHTML = '<span class="iconfont icon-edit-view"></span>';
+		toolLi.onclick = function(){
+			document.getElementById("out").setAttribute("style","left:50%;");
+			document.getElementById("in").setAttribute("style","width:50%;");
 		}
 		toolLiRightUl.appendChild(toolLi);
 	}
