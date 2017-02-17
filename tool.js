@@ -9,7 +9,7 @@ var toolLiRightUl = document.createElement("ul");
 toolLiRight.appendChild(toolLiRightUl);
 toolUl.appendChild(toolLiRight);
 toolbarDiv.appendChild(toolUl);
-document.getElementById("content").appendChild(toolbarDiv);
+document.getElementById("markdown-editor").appendChild(toolbarDiv);
 var status = 0;
 
 for (var i = 0; i < toollists.length; i++) {
@@ -155,7 +155,46 @@ for (var i = 0; i < toollists.length; i++) {
 		toolLi.setAttribute("title","帮助");
 		toolLi.innerHTML = '<span class="iconfont icon-question"></span>';
 		toolLi.onclick = function(){
-			// editor.redo();
+			var help_word = '1.按住ctrl+shift+s可弹出保存选项<br>\
+			2.直接按ctrl+s可直接保存文件<br>\
+			3.加粗可使用 **输入文字内容**<br>\
+			4.斜体可使用 *输入文字内容*<br>\
+			5.链接可使用 [链接文字](http://www.example.com)<br>\
+			6.引用可使用 > 输入文字内容<br>\
+			7.代码可使用 <br>\
+			``` <br>\
+			输入代码 <br>\
+			``` <br>\
+			8.图片可使用 ![image](图片地址)<br>\
+			9.数字列表可使用 1.输入文字内容<br>\
+			10.普通列表可使用 - 输入文字内容<br>\
+			11.标题可使用 # 输入文字内容<br>\
+			说明：从h1-h6 分别是# ## ### #### ##### ######<br>\
+			12.分割线可使用 ----------<br>\
+			13.表格可使用<br>\
+			表头1 | 表头2<br>\
+			---|---<br>\
+			参数1 | 参数2<br>\
+			';
+			var question_help = document.createElement("div");
+			question_help.setAttribute("style","position:absolute;width:350px;height:500px;margin-left:-175px;left:50%;top:50%;margin-top:-250px;background:#eff;color:#999;border:1px solid #ccc;border-radius:5px;");
+			var question_title = document.createElement("div");
+			question_title.setAttribute("style","height:30px;border-bottom:1px solid #ccc;widhth:100%;line-height:30px;font-family:'微软雅黑';padding:0 10px 0 10px;");
+			question_title.innerHTML = '帮助';
+			var question_close = document.createElement("a");
+			question_close.setAttribute("style","float:right;");
+			question_close.setAttribute("href","javascript:;");
+			question_close.innerHTML = '&times;';
+			question_close.onclick = function(){
+				document.body.removeChild(question_help);
+			}
+			question_title.appendChild(question_close);
+			question_help.appendChild(question_title);
+			var question_body = document.createElement("div");
+			question_body.setAttribute("style","width:100%;height:100%;padding:10px;");
+			question_body.innerHTML = help_word;
+			question_help.appendChild(question_body);
+			document.getElementsByTagName("body")[0].appendChild(question_help);
 		}
 		toolUl.appendChild(toolLi);
 	}
@@ -166,10 +205,10 @@ for (var i = 0; i < toollists.length; i++) {
 		toolLi.innerHTML = '<span class="iconfont icon-full-screen"></span>';
 		toolLi.onclick = function(){
 			if(status == 0){
-				document.getElementById("content").setAttribute("style","width:100%;height:"+(document.body.scrollHeight-30)+"px;");
+				document.getElementById("markdown-editor").setAttribute("style","width:100%;height:"+(document.body.scrollHeight-30)+"px;");
 				status = 1;
 			}else if(status == 1){
-				document.getElementById("content").setAttribute("style","");
+				document.getElementById("markdown-editor").setAttribute("style","");
 				status = 0;	
 			}
 		}
