@@ -2,34 +2,20 @@
 <html>
 <head>
   <title>Markdown Editor</title>
-  <script src="markdown-it.js"></script>
-  <script src="markdown-it-footnote.js"></script>
-  <script src="highlight.pack.js"></script>
-  <script src="emojify.js"></script>
-  <script src="codemirror/lib/codemirror.js"></script>
-  <script src="codemirror/overlay.js"></script>
-  <script src="codemirror/xml/xml.js"></script>
-  <script src="codemirror/markdown/markdown.js"></script>
-  <script src="codemirror/gfm/gfm.js"></script>
-  <script src="codemirror/javascript/javascript.js"></script>
-  <script src="codemirror/css/css.js"></script>
-  <script src="codemirror/htmlmixed/htmlmixed.js"></script>
-  <script src="codemirror/lib/util/continuelist.js"></script>
-  <script src="rawinflate.js"></script>
-  <script src="rawdeflate.js"></script>
-  <link rel="stylesheet" href="base16-light.css">
   <link rel="stylesheet" href="codemirror/lib/codemirror.css">
-  <link rel="stylesheet" href="default.css">
+  <link rel="stylesheet" href="themes/base16-light.css">
+  <link rel="stylesheet" href="themes/default.css">
   <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="font/iconfont.css">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="editor.css">
 </head>
 <body>
-  <div id="markdown-editor">
-    <div id="in"><form><textarea id="code"></textarea></form></div>
-    <div id="out"></div>
-  </div>
-  <script type="text/javascript" src="index.js" charset="utf-8"></script>
-  <script type="text/javascript" src="tool.js" charset="utf-8"></script>
+  <script type="text/plain" id="myEditor">
+    <p>这里我可以写一些输入提示</p>
+  </script>
+  <script src="editor_api.js"></script>
+  <script>
+    var myEditor = MD.getEditor('myEditor',{});
+  </script>
 </body>
 </html>
