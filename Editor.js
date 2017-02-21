@@ -117,6 +117,7 @@ MD = {
     },
 
     init:function(id, config){
+        var textHtml = document.getElementById(id).innerHTML;
         var markdownDiv = document.createElement("div");
         markdownDiv.id = id;
         markdownDiv.className = "markdown-editor";
@@ -127,6 +128,7 @@ MD = {
         this.textarea = document.createElement("textarea");
         this.textarea.id = "code";
         this.textarea.setAttribute("name",config.name || id);
+        this.textarea.innerHTML = textHtml;
         this.inDiv.appendChild(this.textarea);
         this.editor = CodeMirror.fromTextArea(this.textarea, {
             mode: 'gfm',
