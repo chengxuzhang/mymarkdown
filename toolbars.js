@@ -1,6 +1,5 @@
+(function(){
 TOOLBARS = {
-
-	toollists : ['bold', 'italic', '|', 'link', 'quote', 'code', 'image', '|', 'ul', 'ol', 'title', 'hr', 'table', '|', 'cancel', 'sure', '|', 'question', 'left', 'edit-view', 'right', 'full-screen'],
 
 	toolbars:function (markdownDiv, editor){
 
@@ -16,14 +15,14 @@ TOOLBARS = {
 	// document.getElementById("markdown-editor").appendChild(toolbarDiv);
 	var status = 0;
 
-	for (var i = 0; i < this.toollists.length; i++) {
-		if(this.toollists[i] == "|"){
+	for (var i = 0; i < MD.toolbars.length; i++) {
+		if(MD.toolbars[i] == "|"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "group-sign";
 			toolLi.innerHTML = '<span class="sign"></span>';
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "bold"){
+		if(MD.toolbars[i] == "Bold"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-bold";
 			toolLi.setAttribute("title","加粗");
@@ -33,7 +32,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "italic"){
+		if(MD.toolbars[i] == "Italic"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-italic";
 			toolLi.setAttribute("title","斜体");
@@ -43,7 +42,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "link"){
+		if(MD.toolbars[i] == "Link"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-link";
 			toolLi.setAttribute("title","链接");
@@ -53,7 +52,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "quote"){
+		if(MD.toolbars[i] == "Quote"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-quote";
 			toolLi.setAttribute("title","引用");
@@ -63,7 +62,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "code"){
+		if(MD.toolbars[i] == "Code"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-code";
 			toolLi.setAttribute("title","代码");
@@ -73,7 +72,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "image"){
+		if(MD.toolbars[i] == "Image"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-image";
 			toolLi.setAttribute("title","图片");
@@ -83,7 +82,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "ul"){
+		if(MD.toolbars[i] == "Ul"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-ul";
 			toolLi.setAttribute("title","数字列表");
@@ -93,7 +92,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "ol"){
+		if(MD.toolbars[i] == "Ol"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-ol";
 			toolLi.setAttribute("title","普通列表");
@@ -103,7 +102,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "title"){
+		if(MD.toolbars[i] == "Title"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-title";
 			toolLi.setAttribute("title","标题");
@@ -113,7 +112,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "hr"){
+		if(MD.toolbars[i] == "Hr"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-hr";
 			toolLi.setAttribute("title","分割线");
@@ -123,7 +122,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "table"){
+		if(MD.toolbars[i] == "Table"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-table";
 			toolLi.setAttribute("title","表格");
@@ -133,7 +132,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "cancel"){
+		if(MD.toolbars[i] == "Cancel"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-cancel";
 			toolLi.setAttribute("title","撤销");
@@ -143,7 +142,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "sure"){
+		if(MD.toolbars[i] == "Sure"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-sure";
 			toolLi.setAttribute("title","返回");
@@ -153,7 +152,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "question"){
+		if(MD.toolbars[i] == "Question"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-question";
 			toolLi.setAttribute("title","帮助");
@@ -202,7 +201,7 @@ TOOLBARS = {
 			}
 			toolUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "full-screen"){
+		if(MD.toolbars[i] == "FullScreen"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-full-screen";
 			toolLi.setAttribute("title","全屏");
@@ -218,7 +217,7 @@ TOOLBARS = {
 			}
 			toolLiRightUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "left"){
+		if(MD.toolbars[i] == "Left"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-left";
 			toolLi.setAttribute("title","预览");
@@ -229,7 +228,7 @@ TOOLBARS = {
 			}
 			toolLiRightUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "right"){
+		if(MD.toolbars[i] == "Right"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-right";
 			toolLi.setAttribute("title","编辑");
@@ -240,7 +239,7 @@ TOOLBARS = {
 			}
 			toolLiRightUl.appendChild(toolLi);
 		}
-		if(this.toollists[i] == "edit-view"){
+		if(MD.toolbars[i] == "EditView"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-edit-view";
 			toolLi.setAttribute("title","编辑预览");
@@ -257,4 +256,5 @@ TOOLBARS = {
 
 	},
 }
+})();
 

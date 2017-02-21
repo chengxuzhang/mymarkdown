@@ -19,6 +19,8 @@
             'codemirror/lib/util/continuelist.js',
             '_src/other/rawinflate.js',
             '_src/other/rawdeflate.js',
+            '_src/style.js',
+            'config/main.js',
             'toolbars.js',
             'Editor.js',
       ],

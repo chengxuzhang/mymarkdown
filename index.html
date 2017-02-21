@@ -2,12 +2,6 @@
 <html>
 <head>
   <title>Markdown Editor</title>
-  <link rel="stylesheet" href="codemirror/lib/codemirror.css">
-  <link rel="stylesheet" href="themes/base16-light.css">
-  <link rel="stylesheet" href="themes/default.css">
-  <link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="font/iconfont.css">
-  <link rel="stylesheet" href="editor.css">
 </head>
 <body>
   <script type="text/plain" id="myEditor">
@@ -15,7 +9,10 @@
   </script>
   <script src="editor_api.js"></script>
   <script>
-    var myEditor = MD.getEditor('myEditor',{});
+    var myEditor = MD.getEditor('myEditor',{
+      name : 'content',
+      toolbars : ['Bold', 'Italic', '|', 'Link', 'Quote', 'Code', 'Image', '|', 'Ul', 'Ol', 'Title', 'Hr', 'Table', '|', 'Cancel', 'Sure', '|', 'Question', 'Left', 'EditView', 'Right', 'FullScreen'],
+    });
   </script>
 </body>
 </html>

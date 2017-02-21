@@ -108,12 +108,15 @@ MD = {
     outDiv:{},
     textarea:{},
     editor:{},
+    toolbars:{},
 
-    getEditor:function(id,config){
-        this.init(id);
+    getEditor:function(id, config){
+        this.toolbars = config.toolbars || MARKDOWN_CONFIG.toolbars;
+
+        this.init(id, config);
     },
 
-    init:function(id){
+    init:function(id, config){
         var markdownDiv = document.createElement("div");
         markdownDiv.id = id;
         markdownDiv.className = "markdown-editor";
@@ -121,11 +124,10 @@ MD = {
         this.inDiv = document.createElement("div");
         this.inDiv.id = "in";
         markdownDiv.appendChild(this.inDiv);
-        var form = document.createElement("form");
-        this.inDiv.appendChild(form);
         this.textarea = document.createElement("textarea");
         this.textarea.id = "code";
-        form.appendChild(this.textarea);
+        this.textarea.setAttribute("name",config.name || id);
+        this.inDiv.appendChild(this.textarea);
         this.editor = CodeMirror.fromTextArea(this.textarea, {
             mode: 'gfm',
             lineNumbers: false,
@@ -183,6 +185,8 @@ MD = {
 
     updateHash:function(){
         window.location.hash = btoa(RawDeflate.deflate(unescape(encodeURIComponent(MD.editor.getValue()))));
+        // 设置textarea内容
+        MD.textarea.innerHTML = MD.outDiv.innerHTML;
     },
 
     setOutput:function(val){
