@@ -8,7 +8,7 @@
             "themes/default.css",
             "bootstrap/dist/css/bootstrap.min.css",
             "font/iconfont.css",
-            "editor.css",
+            "themes/editor.css",
       ],
       baseURL = '';
       for (var i=0,pi;pi = paths[i++];) {

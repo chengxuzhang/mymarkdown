@@ -25,17 +25,6 @@
         }
     }).use(markdownitFootnote);
 
-
-    document.addEventListener('drop', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        var reader = new FileReader();
-        reader.onload = function(e){
-          editor.setValue(e.target.result);
-        };
-        reader.readAsText(e.dataTransfer.files[0]);
-    }, false);
-
     var menuVisible = false;
     var menu = document.createElement("div");
     menu.id = "menu";
@@ -108,10 +97,12 @@ MD = {
     outDiv:{},
     textarea:{},
     editor:{},
-    toolbars:{},
+    toolbars:[],
+    path:'',
 
     getEditor:function(id, config){
         this.toolbars = config.toolbars || MARKDOWN_CONFIG.toolbars;
+        this.path = config.path || MARKDOWN_CONFIG.path;
 
         this.init(id, config);
     },
@@ -240,5 +231,15 @@ MD = {
     },
 
 }
+
+    document.addEventListener('drop', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var reader = new FileReader();
+        reader.onload = function(e){
+            MD.editor.setValue(e.target.result);
+        };
+        reader.readAsText(e.dataTransfer.files[0]);
+    }, false);
 
 })();

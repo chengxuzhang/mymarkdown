@@ -21,11 +21,11 @@
             '_src/other/rawdeflate.js',
             '_src/style.js',
             'config/main.js',
-            'toolbars.js',
+            'plugins/toolbars.js',
             'Editor.js',
       ],
       baseURL = '';
       for (var i=0,pi;pi = paths[i++];) {
-            document.write('<script type="text/javascript" src="'+ baseURL + pi +'"></script>');
+            document.write('<script type="text/javascript" src="'+ baseURL + pi +'" charset="utf-8"></script>');
       }
 })();

@@ -73,12 +73,18 @@ TOOLBARS = {
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Image"){
+			// 载入image插件
+			var imagePaste = document.createElement("script");
+			imagePaste.type = "text/javascript";
+			imagePaste.src = "plugins/image/paste.js";
+			document.getElementsByTagName("head")[0].appendChild(imagePaste);
+
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-image";
 			toolLi.setAttribute("title","图片");
 			toolLi.innerHTML = '<span class="iconfont icon-image"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('![image](codemirror.jpg)');
+				editor.replaceSelection('![image](themes/codemirror.jpg)');
 			}
 			toolUl.appendChild(toolLi);
 		}
