@@ -99,6 +99,7 @@ MD = {
     editor:{},
     toolbars:[],
     path:'',
+    isEdit:false,
 
     getEditor:function(id, config){
         this.toolbars = config.toolbars || MARKDOWN_CONFIG.toolbars;
@@ -130,6 +131,21 @@ MD = {
             extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
         });
         this.editor.on('change', this.update);
+        this.editor.on('focus', this.setFocus);
+        this.editor.on('blur', this.setBlur);
+        /*
+        this.editor.on("drop",function(e){
+            if(!(e.dataTransfer && e.dataTransfer.files)){
+                alert("该浏览器不支持操作");
+                return false;
+            }
+            for(var i=0;i<e.dataTransfer.files.length;i++){
+                console.log(e.dataTransfer.files[i]);
+                // fileUpload(e.dataTransfer.files[i]);
+            }
+            e.preventDefault();
+        });
+        */
         this.outDiv = document.createElement("div");
         this.outDiv.id = "out";
         markdownDiv.appendChild(this.outDiv);
@@ -168,6 +184,16 @@ MD = {
         }else{ 
             parent.insertBefore( newElement, targetElement.nextSibling ); 
         }; 
+    },
+
+    setFocus:function(e){
+        MD.isEdit = true;
+        // console.log(MD.isEdit);
+    },
+
+    setBlur:function(e){
+        MD.isEdit = false;
+        // console.log(MD.isEdit);
     },
 
     update:function(e){
@@ -231,15 +257,20 @@ MD = {
     },
 
 }
-
+    
+    /*
     document.addEventListener('drop', function(e){
+        // console.log(e.dataTransfer.files[0]);
+        if(!(e.dataTransfer&&e.dataTransfer.files)){
+            alert("该浏览器不支持操作");
+            return;
+        }
+        for(var i=0;i<e.dataTransfer.files.length;i++){
+            console.log(e.dataTransfer.files[i]);
+            fileUpload(e.dataTransfer.files[i]);
+        }
         e.preventDefault();
-        e.stopPropagation();
-        var reader = new FileReader();
-        reader.onload = function(e){
-            MD.editor.setValue(e.target.result);
-        };
-        reader.readAsText(e.dataTransfer.files[0]);
-    }, false);
+    });
+    */
 
 })();

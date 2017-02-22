@@ -5,14 +5,14 @@ body {margin: 0;}
     }
 
     .markdown-editor{
-      margin-top:30px;
-      margin-left:0px;
+      margin-top:35px;
+      margin-left:5px;
       width:1250px;
       height: 380px;
       position: relative;
     }
 
-    .toolsbar{
+    .markdown-editor .toolsbar{
       position: absolute;
       margin-top:-30px;
       height: 30px;
@@ -23,13 +23,13 @@ body {margin: 0;}
       border-radius: 5px 5px 0 0;
     }
 
-    .toolsbar ul,.toolsbar ul li{
+    .markdown-editor .toolsbar ul,.toolsbar ul li{
       margin: 0 !important;
       padding: 0 !important;
       list-style: none;
     }
 
-    .toolsbar ul li{
+    .markdown-editor .toolsbar ul li{
       float:left;
       width: 30px;
       height: 30px;
@@ -38,19 +38,19 @@ body {margin: 0;}
       text-align: center; 
     }
 
-    .toolsbar ul li.group-sign{
+    .markdown-editor .toolsbar ul li.group-sign{
       width: 6px !important;
     }
 
-    .toolsbar ul li.tool{
+    .markdown-editor .toolsbar ul li.tool{
       cursor: pointer;
     }
 
-    .toolsbar ul li span{
+    .markdown-editor .toolsbar ul li span{
       color:#ccc;
     }
 
-    .toolsbar ul li span.sign{
+    .markdown-editor .toolsbar ul li span.sign{
       width: 1px;
       background: #ccc;
       display: block;
@@ -59,10 +59,16 @@ body {margin: 0;}
       margin-left:3px;
     }
 
-    .toolsbar ul li.tool:hover{
+    .markdown-editor .toolsbar ul li.tool:hover{
       background: #eff;
+      border-bottom:1px solid #eee;
     }
-    #in{
+
+    .markdown-editor .toolsbar ul li.tool:hover span{
+      color:#999;
+    }
+
+    .markdown-editor #in{
       position: absolute;
       top: 0;
       left: 0;
@@ -88,7 +94,7 @@ body {margin: 0;}
       box-sizing: border-box;
     }
 
-    #out{
+    .markdown-editor #out{
       position: absolute;
       top: 0;
       right: 0;

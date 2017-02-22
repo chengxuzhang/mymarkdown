@@ -77,6 +77,7 @@ TOOLBARS = {
 			var imagePaste = document.createElement("script");
 			imagePaste.type = "text/javascript";
 			imagePaste.src = "plugins/image/paste.js";
+			imagePaste.charset = "utf-8";
 			document.getElementsByTagName("head")[0].appendChild(imagePaste);
 
 			var toolLi = document.createElement("li");
@@ -84,7 +85,8 @@ TOOLBARS = {
 			toolLi.setAttribute("title","图片");
 			toolLi.innerHTML = '<span class="iconfont icon-image"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('![image](themes/codemirror.jpg)');
+				PASTE.showUpload();
+				// editor.replaceSelection('![image](themes/codemirror.jpg)');
 			}
 			toolUl.appendChild(toolLi);
 		}
@@ -184,6 +186,7 @@ TOOLBARS = {
 				表头1 | 表头2<br>\
 				---|---<br>\
 				参数1 | 参数2<br>\
+				14.支持粘贴图片上传功能(直接复制网页图片或者QQ截图)\
 				';
 				var question_help = document.createElement("div");
 				question_help.setAttribute("style","position:absolute;width:350px;height:500px;margin-left:-175px;left:50%;top:50%;margin-top:-250px;background:#eff;color:#999;border:1px solid #ccc;border-radius:5px;");

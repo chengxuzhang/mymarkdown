@@ -2,6 +2,8 @@ MARKDOWN_CONFIG = window.MARKDOWN_CONFIG || {};
 
 var TOOLBARS = {};
 
+var PASTE = {};
+
 var MD = {};
 
 MD.plugins = {};
