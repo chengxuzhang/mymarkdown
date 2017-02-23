@@ -311,6 +311,10 @@ document.addEventListener('paste', function (event) {
       var  items = clipboardData.items,
         len = items.length,
         blob = null;
+        // 下面这种情况是粘贴的纯文本+HTML形式
+        if (items[0].type === 'text/plain' && items[1].type === 'text/html') {        
+          return false;
+        }
       isChrome = true;
       //items.length比较有意思，初步判断是根据mime类型来的，即有几种mime类型，长度就是几（待验证）
       //如果粘贴纯文本，那么len=1，如果粘贴网页图片，len=2, items[0].type = 'text/plain', items[1].type = 'image/*'
