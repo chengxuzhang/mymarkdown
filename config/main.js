@@ -6,6 +6,8 @@
 		path : 'upload.php', // 图片上传路径
 
 		language : 'zh-CN',
+
+		name : 'content', // 表单提交时候的name值
 	}
 
 })();

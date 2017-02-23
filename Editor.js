@@ -142,7 +142,15 @@ MD = {
      */
     language:MARKDOWN_CONFIG.language,
 
+    /**
+     * textarea name值
+     * @type {[type]}
+     */
+    name : MARKDOWN_CONFIG.name,
+
     getEditor:function(id, config){
+        if(!config) config = {};
+
         this.init(id, config);
     },
 
@@ -157,7 +165,7 @@ MD = {
         markdownDiv.appendChild(this.inDiv);
         this.textarea = document.createElement("textarea");
         this.textarea.id = "code";
-        this.textarea.setAttribute("name",config.name || id);
+        this.textarea.setAttribute("name",config.name || this.name);
         this.textarea.innerHTML = textHtml;
         this.inDiv.appendChild(this.textarea);
         this.editor = CodeMirror.fromTextArea(this.textarea, {
