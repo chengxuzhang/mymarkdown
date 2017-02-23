@@ -47,7 +47,8 @@ PASTE = {
     tab_content.className = "tab-content";
     var uploadDiv = document.createElement("div");
     uploadDiv.className = "tab-pane active";
-    uploadDiv.innerHTML = '<input type="file" name="file">';
+    uploadDiv.setAttribute("style","padding:20px 10px 0 10px;");
+    uploadDiv.innerHTML = '<button class="btn btn-primary btn-sm" style="position:relative;">添加图片<input type="file" name="file" id="file" multiple="multiple" style="opacity:.0;width:100%;height:100%;display:inline-block;position:absolute;left:0;top:0;cursor:pointer;"></button><button class="btn btn-success btn-sm">上传图片</button>';
     var webDiv = document.createElement("div");
     webDiv.className = "tab-pane";
     webDiv.setAttribute("style","padding:20px 10px 0 10px;");
@@ -91,13 +92,85 @@ PASTE = {
         var value = 'sb';
       }else if(_this.tab === 2){
         var value = webDiv.getElementsByTagName("input")[0].value;
+        MD.editor.replaceSelection('![image]('+value+')');
       }
-      MD.editor.replaceSelection('![image]('+value+')');
       _this.hideUpload();
     }
 
     btn2.onclick = function(){
       _this.hideUpload();
+    }
+
+    var fileInput = uploadDiv.getElementsByTagName("input")[0];
+
+    var trs = [];
+
+    fileInput.onchange = function(){
+
+            var table = document.createElement("table");
+            table.className = "table table-bordered";
+            for (var i = 0; i < fileInput.files.length; i++) {
+                var tr = document.createElement("tr");
+                tr.innerHTML = '<td>'+fileInput.files[i]['name']+'<div style="width:200px;height:16px;position:relative;background:#eff;border-radius:3px;"><span style="position:absolue:left:0;top:0;height:16px;background:blue;width:0%;display:block;border-radius:3px;transition: width 1s;-moz-transition: width 1s;-webkit-transition: width 1s;-o-transition: width 1s;"></span></div></td>';
+                trs[i] = tr;
+                table.appendChild(tr);
+            }
+            uploadDiv.appendChild(table);
+
+    }
+
+    uploadDiv.getElementsByTagName("button")[1].onclick = function(){
+
+            var i = 0;
+
+            var timer = setInterval(function(){
+
+                
+                if(i>=fileInput.files.length){
+                    clearInterval(timer);
+                    return false;
+                }
+
+                //用法
+                //触发文件上传事件
+                _this.uploadImg({
+                    //上传文件接收地址
+                    uploadUrl: MD.path + "?type=img",
+
+                    file:fileInput.files[i],
+
+                    index:i,
+                    //选择文件后，发送文件前自定义事件
+                    //file为上传的文件信息，可在此处做文件检测、初始化进度条等动作
+                    beforeSend: function(file) {
+                 
+                    },
+                    //文件上传完成后回调函数
+                    //res为文件上传信息
+                    callback: function(res, index) {
+                      var img = document.createElement("img");
+                      img.src = res.store_path;
+                      img.style.width = "80px";
+                      img.style.height = "60px";
+                      img.style.cursor = "pointer";
+
+                      img.onclick = function(){
+                        MD.editor.replaceSelection('![image]('+res.store_path+')');
+                      }
+
+                      trs[index].getElementsByTagName("td")[0].appendChild(img);
+                    },
+                    //返回上传过程中包括上传进度的相关信息
+                    //详细请看res,可在此加入进度条相关代码
+                    uploading: function(res, index) {
+                        trs[index].getElementsByTagName("span")[0].style.width = res + '%';
+                    }
+                });
+
+                i++;
+
+            },200);
+
     }
 
     document.getElementsByTagName("body")[0].appendChild(this.modal);
@@ -112,13 +185,57 @@ PASTE = {
     document.body.removeChild(this.cover);
   },
 
+  uploadImg:function(option) {
+                var file,
+                    fd = new FormData(),
+                    xhr = new XMLHttpRequest(),
+                    loaded, tot, per, uploadUrl, index;
+         
+                uploadUrl = option.uploadUrl;
+                callback = option.callback;
+                uploading = option.uploading;
+                beforeSend = option.beforeSend;
+                index = option.index;
+         
+                file = option.file;
+                if(beforeSend instanceof Function){
+                    if(beforeSend(file) === false){
+                        return false;
+                    }
+                }
+                     
+                fd.append("files", file);
+                //追加文件数据 
+         
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        if(callback instanceof Function){
+                            callback(JSON.parse(xhr.responseText), index);
+                        }
+                    }
+                }
+         
+                //侦查当前附件上传情况
+                xhr.upload.onprogress = function(evt) {
+                    loaded = evt.loaded;
+                    tot = evt.total;
+                    per = Math.floor(100 * loaded / tot); //已经上传的百分比
+                    if(uploading instanceof Function){
+                        uploading(per, index);
+                    }
+                };
+         
+                xhr.open("post", uploadUrl);
+                xhr.send(fd);
+            },
+
   uploadImgFromPaste:function(file, type, isChrome) {
     var formData = new FormData();
     formData.append('image', file);
     formData.append('submission-type', type);
    
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', MD.path);
+    xhr.open('POST', MD.path + '?type=base64');
     xhr.onload = function () {
       if ( xhr.readyState === 4 ) {
         if ( xhr.status === 200 ) {
