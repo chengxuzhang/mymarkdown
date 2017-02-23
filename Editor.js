@@ -197,7 +197,7 @@ MD = {
         markdownDiv.appendChild(this.outDiv);
         var toolbars = TOOLBARS.toolbars(markdownDiv, this.editor);
         markdownDiv.appendChild(toolbars);
-        document.body.removeChild(document.getElementById(id));
+        document.getElementById(id).parentNode.removeChild(document.getElementById(id));
 
         if(window.location.hash){
             var h = window.location.hash.replace(/^#/, '');

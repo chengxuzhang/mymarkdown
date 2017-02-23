@@ -4,7 +4,14 @@
   <title>Markdown Editor</title>
 </head>
 <body>
-  <script type="text/plain" id="myEditor"></script>
+
+<style>
+	.box{margin-top:50px;margin-left:20px;width:1200px;height: 300px;}
+</style>
+	<div class="box">
+		<script type="text/plain" id="myEditor"></script>
+	</div>
+  
   <script src="editor_api.js"></script>
   <script>
     var myEditor = MD.getEditor('myEditor',{
