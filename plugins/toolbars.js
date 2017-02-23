@@ -25,50 +25,50 @@ TOOLBARS = {
 		if(MD.toolbars[i] == "Bold"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-bold";
-			toolLi.setAttribute("title","加粗");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Bold);
 			toolLi.innerHTML = '<span class="iconfont icon-bold"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('**输入文字**');
+				editor.replaceSelection('**'+ MD.I18N.toolbars_tip_msg +'**');
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Italic"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-italic";
-			toolLi.setAttribute("title","斜体");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Italic);
 			toolLi.innerHTML = '<span class="iconfont icon-italic"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('*输入文字*');
+				editor.replaceSelection('*'+ MD.I18N.toolbars_tip_msg +'*');
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Link"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-link";
-			toolLi.setAttribute("title","链接");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Link);
 			toolLi.innerHTML = '<span class="iconfont icon-link"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('[链接文字](http://www.codegong.com/)');
+				editor.replaceSelection('['+ MD.I18N.toolbars_tip_msg +'](http://www.codegong.com/)');
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Quote"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-quote";
-			toolLi.setAttribute("title","引用");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Quote);
 			toolLi.innerHTML = '<span class="iconfont icon-quote"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('> 输入文字');
+				editor.replaceSelection('> ' + MD.I18N.toolbars_tip_msg);
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Code"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-code";
-			toolLi.setAttribute("title","代码");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Code);
 			toolLi.innerHTML = '<span class="iconfont icon-code"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('```\n输入文字\n```');
+				editor.replaceSelection('```\n'+ MD.I18N.toolbars_tip_msg +'\n```');
 			}
 			toolUl.appendChild(toolLi);
 		}
@@ -82,48 +82,47 @@ TOOLBARS = {
 
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-image";
-			toolLi.setAttribute("title","图片");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Image);
 			toolLi.innerHTML = '<span class="iconfont icon-image"></span>';
 			toolLi.onclick = function(){
 				PASTE.showUpload();
-				// editor.replaceSelection('![image](themes/codemirror.jpg)');
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Ul"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-ul";
-			toolLi.setAttribute("title","数字列表");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Ul);
 			toolLi.innerHTML = '<span class="iconfont icon-ul"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('1.输入文字');
+				editor.replaceSelection('1.' + MD.I18N.toolbars_tip_msg);
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Ol"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-ol";
-			toolLi.setAttribute("title","普通列表");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Ol);
 			toolLi.innerHTML = '<span class="iconfont icon-ol"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('- 输入文字');
+				editor.replaceSelection('- ' + MD.I18N.toolbars_tip_msg);
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Title"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-title";
-			toolLi.setAttribute("title","标题");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Title);
 			toolLi.innerHTML = '<span class="iconfont icon-title"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('# 输入文字');
+				editor.replaceSelection('# ' + MD.I18N.toolbars_tip_msg);
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Hr"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-hr";
-			toolLi.setAttribute("title","分割线");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Hr);
 			toolLi.innerHTML = '<span class="iconfont icon-hr"></span>';
 			toolLi.onclick = function(){
 				editor.replaceSelection('----------');
@@ -133,17 +132,17 @@ TOOLBARS = {
 		if(MD.toolbars[i] == "Table"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-table";
-			toolLi.setAttribute("title","表格");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Table);
 			toolLi.innerHTML = '<span class="iconfont icon-table"></span>';
 			toolLi.onclick = function(){
-				editor.replaceSelection('表格头 1 | 表格头 2\n---|---\n参数1 | 参数2\n参数1 | 参数2');
+				editor.replaceSelection(MD.I18N.toolbars_table_msg);
 			}
 			toolUl.appendChild(toolLi);
 		}
 		if(MD.toolbars[i] == "Cancel"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-cancel";
-			toolLi.setAttribute("title","撤销");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Cancel);
 			toolLi.innerHTML = '<span class="iconfont icon-cancel"></span>';
 			toolLi.onclick = function(){
 				editor.undo();
@@ -153,7 +152,7 @@ TOOLBARS = {
 		if(MD.toolbars[i] == "Sure"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-sure";
-			toolLi.setAttribute("title","返回");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Sure);
 			toolLi.innerHTML = '<span class="iconfont icon-sure"></span>';
 			toolLi.onclick = function(){
 				editor.redo();
@@ -163,36 +162,15 @@ TOOLBARS = {
 		if(MD.toolbars[i] == "Question"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-question";
-			toolLi.setAttribute("title","帮助");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Question);
 			toolLi.innerHTML = '<span class="iconfont icon-question"></span>';
 			toolLi.onclick = function(){
-				var help_word = '1.按住ctrl+shift+s可弹出保存选项<br>\
-				2.直接按ctrl+s可直接保存文件<br>\
-				3.加粗可使用 **输入文字内容**<br>\
-				4.斜体可使用 *输入文字内容*<br>\
-				5.链接可使用 [链接文字](http://www.example.com)<br>\
-				6.引用可使用 > 输入文字内容<br>\
-				7.代码可使用 <br>\
-				``` <br>\
-				输入代码 <br>\
-				``` <br>\
-				8.图片可使用 ![image](图片地址)<br>\
-				9.数字列表可使用 1.输入文字内容<br>\
-				10.普通列表可使用 - 输入文字内容<br>\
-				11.标题可使用 # 输入文字内容<br>\
-				说明：从h1-h6 分别是# ## ### #### ##### ######<br>\
-				12.分割线可使用 ----------<br>\
-				13.表格可使用<br>\
-				表头1 | 表头2<br>\
-				---|---<br>\
-				参数1 | 参数2<br>\
-				14.支持粘贴图片上传功能(直接复制网页图片或者QQ截图)\
-				';
+				var help_word = MD.I18N.toolbars_question_msg;
 				var question_help = document.createElement("div");
 				question_help.setAttribute("style","position:absolute;width:350px;height:500px;margin-left:-175px;left:50%;top:50%;margin-top:-250px;background:#eff;color:#999;border:1px solid #ccc;border-radius:5px;");
 				var question_title = document.createElement("div");
 				question_title.setAttribute("style","height:30px;border-bottom:1px solid #ccc;widhth:100%;line-height:30px;font-family:'微软雅黑';padding:0 10px 0 10px;");
-				question_title.innerHTML = '帮助';
+				question_title.innerHTML = MD.I18N.toolbars_Question;
 				var question_close = document.createElement("a");
 				question_close.setAttribute("style","float:right;");
 				question_close.setAttribute("href","javascript:;");
@@ -213,7 +191,7 @@ TOOLBARS = {
 		if(MD.toolbars[i] == "FullScreen"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-full-screen";
-			toolLi.setAttribute("title","全屏");
+			toolLi.setAttribute("title",MD.I18N.toolbars_FullScreen);
 			toolLi.innerHTML = '<span class="iconfont icon-full-screen"></span>';
 			toolLi.onclick = function(){
 				if(status == 0){
@@ -229,7 +207,7 @@ TOOLBARS = {
 		if(MD.toolbars[i] == "Left"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-left";
-			toolLi.setAttribute("title","预览");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Left);
 			toolLi.innerHTML = '<span class="iconfont icon-left"></span>';
 			toolLi.onclick = function(){
 				document.getElementById("out").setAttribute("style","left:0;");
@@ -240,7 +218,7 @@ TOOLBARS = {
 		if(MD.toolbars[i] == "Right"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-right";
-			toolLi.setAttribute("title","编辑");
+			toolLi.setAttribute("title",MD.I18N.toolbars_Right);
 			toolLi.innerHTML = '<span class="iconfont icon-right"></span>';
 			toolLi.onclick = function(){
 				document.getElementById("out").setAttribute("style","left:100%;display:none;");
@@ -251,7 +229,7 @@ TOOLBARS = {
 		if(MD.toolbars[i] == "EditView"){
 			var toolLi = document.createElement("li");
 			toolLi.className = "tool tool-edit-view";
-			toolLi.setAttribute("title","编辑预览");
+			toolLi.setAttribute("title",MD.I18N.toolbars_EditView);
 			toolLi.innerHTML = '<span class="iconfont icon-edit-view"></span>';
 			toolLi.onclick = function(){
 				document.getElementById("out").setAttribute("style","left:50%;");

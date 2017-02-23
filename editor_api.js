@@ -23,6 +23,7 @@
             'config/main.js',
             'plugins/toolbars.js',
             'Editor.js',
+            '_src/lang/lang.js',
       ],
       baseURL = '';
       for (var i=0,pi;pi = paths[i++];) {

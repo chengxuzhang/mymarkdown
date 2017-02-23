@@ -93,18 +93,56 @@
 
 MD = {
     hashto:{},
+
+    /**
+     * 编辑器左侧的编辑部分
+     * @type {Object}
+     */
     inDiv:{},
+
+    /**
+     * 编辑器右侧部分 预览
+     * @type {Object}
+     */
     outDiv:{},
+
+    /**
+     * textarea 上传内容
+     * @type {Object}
+     */
     textarea:{},
+
+    /**
+     * 编辑器编辑框 codemirror插件对象
+     * @type {Object}
+     */
     editor:{},
-    toolbars:[],
-    path:'',
+
+    /**
+     * 编辑器工具条配置项
+     * @type {Array}
+     */
+    toolbars:MARKDOWN_CONFIG.toolbars,
+
+    /**
+     * 图片上传路径
+     * @type {String}
+     */
+    path:MARKDOWN_CONFIG.path,
+
+    /**
+     * 是否处于编辑状态 失去获取焦点时候调用
+     * @type {Boolean}
+     */
     isEdit:false,
 
-    getEditor:function(id, config){
-        this.toolbars = config.toolbars || MARKDOWN_CONFIG.toolbars;
-        this.path = config.path || MARKDOWN_CONFIG.path;
+    /**
+     * 编辑器语言环境
+     * @type {String}
+     */
+    language:MARKDOWN_CONFIG.language,
 
+    getEditor:function(id, config){
         this.init(id, config);
     },
 

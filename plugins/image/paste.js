@@ -1,14 +1,14 @@
 (function(){
 
-
 PASTE = {
   cover:{},
   modal:{},
   tab:1,
+  historyCache:[],
 
   createCover:function(){
     this.cover = document.createElement("div");
-    this.cover.setAttribute("style","position:absolute;left:0px;top:0px;background:#000;opacity:.6;width:100%;height:100%;z-index:998;");
+    this.cover.setAttribute("style","position:fixed;left:0px;top:0px;background:#000;opacity:.6;width:100%;height:100%;z-index:998;");
     document.getElementsByTagName("body")[0].appendChild(this.cover);
   },
 
@@ -21,7 +21,7 @@ PASTE = {
     this.modal.setAttribute("style","position:absolute;width:500px;height:auto;left:50%;top:50%;margin-left:-250px;margin-top:-250px;border:1px solid #ccc;background:#fff;z-index:999;");
     var title = document.createElement("div");
     title.setAttribute("style","height:40px;width:100%;line-height:40px;border-bottom:1px solid #ccc;padding:0 10px 0 10px;background:#eee;");
-    title.innerHTML = "插入图片";
+    title.innerHTML = MD.I18N.toolbars_image;
     this.modal.appendChild(title);
     var close = document.createElement("a");
     close.setAttribute("style","float:right");
@@ -38,38 +38,65 @@ PASTE = {
     ul.className = "nav nav-tabs";
     var tab1 = document.createElement("li");
     tab1.className = "active";
-    tab1.innerHTML = '<a href="javascript:;">上传图片</a>';
-    var tab2 = document.createElement("li");
-    tab2.innerHTML = '<a href="javascript:;">网络图片</a>';
+    tab1.innerHTML = '<a href="javascript:;">'+ MD.I18N.toolbars_image_tab1 +'</a>';
     ul.appendChild(tab1);
+    var tab2 = document.createElement("li");
+    tab2.innerHTML = '<a href="javascript:;">'+ MD.I18N.toolbars_image_tab2 +'</a>';
     ul.appendChild(tab2);
+    var tab3 = document.createElement("li");
+    tab3.innerHTML = '<a href="javascript:;">'+ MD.I18N.toolbars_image_tab3 +'</a>';
+    ul.appendChild(tab3);
     var tab_content = document.createElement("div");
     tab_content.className = "tab-content";
     var uploadDiv = document.createElement("div");
     uploadDiv.className = "tab-pane active";
     uploadDiv.setAttribute("style","padding:20px 10px 0 10px;");
-    uploadDiv.innerHTML = '<button class="btn btn-primary btn-sm" style="position:relative;">添加图片<input type="file" name="file" id="file" multiple="multiple" style="opacity:.0;width:100%;height:100%;display:inline-block;position:absolute;left:0;top:0;cursor:pointer;"></button><button class="btn btn-success btn-sm">上传图片</button>';
+    uploadDiv.innerHTML = '<button class="btn btn-primary btn-sm" style="position:relative;margin-right:5px;"><span class="glyphicon glyphicon-plus"></span>'+ MD.I18N.toolbars_image_add +'<input type="file" name="file" id="file" multiple="multiple" style="opacity:.0;width:100%;height:100%;display:inline-block;position:absolute;left:0;top:0;cursor:pointer;"></button><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-circle-arrow-up"></span>'+ MD.I18N.toolbars_image_upload +'</button>';
+    tab_content.appendChild(uploadDiv);
     var webDiv = document.createElement("div");
     webDiv.className = "tab-pane";
     webDiv.setAttribute("style","padding:20px 10px 0 10px;");
-    webDiv.innerHTML = '<input type="text" name="text" class="form-control" placeholder="填写图片地址">';
-    tab_content.appendChild(uploadDiv);
+    webDiv.innerHTML = '<input type="text" name="text" class="form-control" placeholder="'+ MD.I18N.toolbars_image_webmsg +'">';
     tab_content.appendChild(webDiv);
+    var historyDiv = document.createElement("div");
+    historyDiv.className = "tab-pane";
+    historyDiv.setAttribute("style","padding:20px 10px 0 10px;");
+    if(this.historyCache){
+      var _history = this.historyCache;
+      for (var i = 0; i < _history.length; i++) {
+        var historyImg = document.createElement("img");
+        historyImg.setAttribute("style","cursor:pointer;margin-right:5px;border:1px solid #eee;padding:5px;width:80px;height:60px;");
+        historyImg.src = _history[i];
+        historyImg.onclick = function(){
+          MD.editor.replaceSelection('![image]('+this.src+')');
+        }
+        historyDiv.appendChild(historyImg);
+      }
+    }
+    tab_content.appendChild(historyDiv);
+
     body.appendChild(ul);
     body.appendChild(tab_content);
     tab1.onclick = function(){
       _this.tab = 1;
       tab1.className = "active";
-      tab2.className = "";
+      tab2.className = tab3.className = "";
       uploadDiv.className = "tab-pane active";
-      webDiv.className = "tab-pane";
+      webDiv.className = historyDiv.className = "tab-pane";
     }
     tab2.onclick = function(){
       _this.tab = 2;
-      tab1.className = "";
       tab2.className = "active";
+      tab1.className = tab3.className = "";
       webDiv.className = "tab-pane active";
-      uploadDiv.className = "tab-pane";
+      uploadDiv.className = historyDiv.className = "tab-pane";
+    }
+    tab3.onclick = function(){
+      _this.tab = 3;
+      tab3.className = "active";
+      tab1.className = tab2.className = "";
+      historyDiv.className = "tab-pane active";
+      webDiv.className = uploadDiv.className = "tab-pane";
     }
 
     var footer = document.createElement("div");
@@ -79,17 +106,19 @@ PASTE = {
     var btn1 = document.createElement("button");
     btn1.setAttribute("style","margin-right:5px;");
     btn1.className = "btn btn-primary btn-sm";
-    btn1.innerHTML = "插入";
+    btn1.innerHTML = MD.I18N.toolbars_image_insert;
     footer.appendChild(btn1);
 
     var btn2 = document.createElement("button");
     btn2.className = "btn btn-default btn-sm";
-    btn2.innerHTML = "取消";
+    btn2.innerHTML = MD.I18N.toolbars_image_cancle;
     footer.appendChild(btn2);
 
     btn1.onclick = function(){
-      if(_this.tab === 1){
-        var value = 'sb';
+      if(_this.tab === 1 || _this.tab === 3){
+        for (var i = 0; i < _this.historyCache.length; i++) {
+          MD.editor.replaceSelection('![image]('+_this.historyCache[i]+')');
+        }
       }else if(_this.tab === 2){
         var value = webDiv.getElementsByTagName("input")[0].value;
         MD.editor.replaceSelection('![image]('+value+')');
@@ -106,74 +135,71 @@ PASTE = {
     var trs = [];
 
     fileInput.onchange = function(){
-
-            var table = document.createElement("table");
-            table.className = "table table-bordered";
-            for (var i = 0; i < fileInput.files.length; i++) {
-                var tr = document.createElement("tr");
-                tr.innerHTML = '<td>'+fileInput.files[i]['name']+'<div style="width:200px;height:16px;position:relative;background:#eff;border-radius:3px;"><span style="position:absolue:left:0;top:0;height:16px;background:blue;width:0%;display:block;border-radius:3px;transition: width 1s;-moz-transition: width 1s;-webkit-transition: width 1s;-o-transition: width 1s;"></span></div></td>';
-                trs[i] = tr;
-                table.appendChild(tr);
-            }
-            uploadDiv.appendChild(table);
-
+      if(uploadDiv.getElementsByTagName("table")[0]){
+        uploadDiv.removeChild(uploadDiv.getElementsByTagName("table")[0]);
+      }   
+      var table = document.createElement("table");
+      table.className = "table table-bordered";
+      for (var i = 0; i < fileInput.files.length; i++) {
+          var tr = document.createElement("tr");
+          tr.innerHTML = '<td>'+fileInput.files[i]['name']+'<div style="width:200px;height:16px;position:relative;background:#eff;border-radius:3px;"><span style="position:absolue:left:0;top:0;height:16px;background:blue;width:0%;display:block;border-radius:3px;transition: width 1s;-moz-transition: width 1s;-webkit-transition: width 1s;-o-transition: width 1s;"></span></div></td><td></td>';
+          trs[i] = tr;
+          table.appendChild(tr);
+      }
+      uploadDiv.appendChild(table);
     }
 
     uploadDiv.getElementsByTagName("button")[1].onclick = function(){
+      var i = 0;
 
-            var i = 0;
+      var timer = setInterval(function(){
+        
+      if(i>=fileInput.files.length){
+          clearInterval(timer);
+          return false;
+      }
 
-            var timer = setInterval(function(){
+      //用法
+      //触发文件上传事件
+      _this.uploadImg({
+        //上传文件接收地址
+        uploadUrl: MD.path + "?type=img",
+        file:fileInput.files[i],
+        index:i,
+        //选择文件后，发送文件前自定义事件
+        //file为上传的文件信息，可在此处做文件检测、初始化进度条等动作
+        beforeSend: function(file) {
 
-                
-                if(i>=fileInput.files.length){
-                    clearInterval(timer);
-                    return false;
-                }
+        },
+        //文件上传完成后回调函数
+        //res为文件上传信息
+        callback: function(res, index) {
+          // 加入历史图片
+          _this.historyCache[index] = res.store_path;
+          var img = document.createElement("img");
+          img.src = res.store_path;
+          img.style.width = "80px";
+          img.style.height = "60px";
+          img.style.cursor = "pointer";
+          img.onclick = function(){
+            MD.editor.replaceSelection('![image]('+res.store_path+')');
+          }
+          trs[index].getElementsByTagName("td")[1].appendChild(img);
+        },
+        //返回上传过程中包括上传进度的相关信息
+        //详细请看res,可在此加入进度条相关代码
+        uploading: function(res, index) {
+          trs[index].getElementsByTagName("span")[0].style.width = res + '%';
+        }
+      });
 
-                //用法
-                //触发文件上传事件
-                _this.uploadImg({
-                    //上传文件接收地址
-                    uploadUrl: MD.path + "?type=img",
+      i++;
 
-                    file:fileInput.files[i],
+    },200);
 
-                    index:i,
-                    //选择文件后，发送文件前自定义事件
-                    //file为上传的文件信息，可在此处做文件检测、初始化进度条等动作
-                    beforeSend: function(file) {
-                 
-                    },
-                    //文件上传完成后回调函数
-                    //res为文件上传信息
-                    callback: function(res, index) {
-                      var img = document.createElement("img");
-                      img.src = res.store_path;
-                      img.style.width = "80px";
-                      img.style.height = "60px";
-                      img.style.cursor = "pointer";
+  }
 
-                      img.onclick = function(){
-                        MD.editor.replaceSelection('![image]('+res.store_path+')');
-                      }
-
-                      trs[index].getElementsByTagName("td")[0].appendChild(img);
-                    },
-                    //返回上传过程中包括上传进度的相关信息
-                    //详细请看res,可在此加入进度条相关代码
-                    uploading: function(res, index) {
-                        trs[index].getElementsByTagName("span")[0].style.width = res + '%';
-                    }
-                });
-
-                i++;
-
-            },200);
-
-    }
-
-    document.getElementsByTagName("body")[0].appendChild(this.modal);
+  document.getElementsByTagName("body")[0].appendChild(this.modal);
   },
 
   showUpload:function(){
@@ -186,48 +212,47 @@ PASTE = {
   },
 
   uploadImg:function(option) {
-                var file,
-                    fd = new FormData(),
-                    xhr = new XMLHttpRequest(),
-                    loaded, tot, per, uploadUrl, index;
+    var file,
+        fd = new FormData(),
+        xhr = new XMLHttpRequest(),
+        loaded, tot, per, uploadUrl, index;
+    uploadUrl = option.uploadUrl;
+    callback = option.callback;
+    uploading = option.uploading;
+    beforeSend = option.beforeSend;
+    index = option.index;
          
-                uploadUrl = option.uploadUrl;
-                callback = option.callback;
-                uploading = option.uploading;
-                beforeSend = option.beforeSend;
-                index = option.index;
-         
-                file = option.file;
-                if(beforeSend instanceof Function){
-                    if(beforeSend(file) === false){
-                        return false;
-                    }
-                }
+    file = option.file;
+    if(beforeSend instanceof Function){
+        if(beforeSend(file) === false){
+            return false;
+        }
+    }
                      
-                fd.append("files", file);
-                //追加文件数据 
+    fd.append("files", file);
+    //追加文件数据 
          
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        if(callback instanceof Function){
-                            callback(JSON.parse(xhr.responseText), index);
-                        }
-                    }
-                }
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            if(callback instanceof Function){
+                callback(JSON.parse(xhr.responseText), index);
+            }
+        }
+    }
          
-                //侦查当前附件上传情况
-                xhr.upload.onprogress = function(evt) {
-                    loaded = evt.loaded;
-                    tot = evt.total;
-                    per = Math.floor(100 * loaded / tot); //已经上传的百分比
-                    if(uploading instanceof Function){
-                        uploading(per, index);
-                    }
-                };
+    //侦查当前附件上传情况
+    xhr.upload.onprogress = function(evt) {
+        loaded = evt.loaded;
+        tot = evt.total;
+        per = Math.floor(100 * loaded / tot); //已经上传的百分比
+        if(uploading instanceof Function){
+            uploading(per, index);
+        }
+    };
          
-                xhr.open("post", uploadUrl);
-                xhr.send(fd);
-            },
+    xhr.open("post", uploadUrl);
+    xhr.send(fd);
+  },
 
   uploadImgFromPaste:function(file, type, isChrome) {
     var formData = new FormData();
