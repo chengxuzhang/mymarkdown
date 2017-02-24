@@ -167,7 +167,7 @@ TOOLBARS = {
 			toolLi.onclick = function(){
 				var help_word = MD.I18N.toolbars_question_msg;
 				var question_help = document.createElement("div");
-				question_help.setAttribute("style","position:absolute;width:350px;height:500px;margin-left:-175px;left:50%;top:50%;margin-top:-250px;background:#eff;color:#999;border:1px solid #ccc;border-radius:5px;");
+				question_help.setAttribute("style","position:absolute;width:400px;height:500px;margin-left:-200px;left:50%;top:50%;margin-top:-250px;background:#eff;color:#999;border:1px solid #ccc;border-radius:5px;");
 				var question_title = document.createElement("div");
 				question_title.setAttribute("style","height:30px;border-bottom:1px solid #ccc;widhth:100%;line-height:30px;font-family:'微软雅黑';padding:0 10px 0 10px;");
 				question_title.innerHTML = MD.I18N.toolbars_Question;
