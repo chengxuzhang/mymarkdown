@@ -17,7 +17,7 @@ class Upload{
             }else{
                 $image_name = $this->generate_string().'.'.$result[2];
             }
-            $image_file = "./upload/{$image_name}";
+            $image_file = $this->createDir() . $image_name;
             //服务器文件存储路径
             if (file_put_contents($image_file, base64_decode(str_replace($result[1], '', $base64_image)))){
                 return $image_file;
@@ -32,8 +32,8 @@ class Upload{
     public function img_upload(){
         $result = explode('.', $_FILES["files"]["name"]);
         $name = $this->generate_string() . '.' . end($result);
-        move_uploaded_file($_FILES["files"]["tmp_name"],iconv("UTF-8","gb2312",'./upload/' . $name));
-        return './upload/' . $name;
+        move_uploaded_file($_FILES["files"]["tmp_name"],iconv("UTF-8","gb2312",$this->createDir() . $name));
+        return $this->createDir() . $name;
     }
 
     private function generate_string( $length = 8 ) { 
@@ -49,7 +49,21 @@ class Upload{
             $string .= $chars[ mt_rand(0, strlen($chars) - 1) ];
         } 
         return $string;
-    } 
+    }
+
+    /**
+     * 创建上传路径
+     * @return [type] [description]
+     */
+    private function createDir(){
+        $dir = './upload/' . date('Ymd');
+
+        if(!file_exists($dir)){
+            mkdir($dir);
+        }
+
+        return $dir . '/';
+    }
 
 }
 

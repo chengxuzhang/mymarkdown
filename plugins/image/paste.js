@@ -1,17 +1,53 @@
 (function(){
 
 PASTE = {
+  /**
+   * 覆盖层
+   * @type {Object}
+   */
   cover:{},
+
+  /**
+   * modal层 上传图片弹框
+   * @type {Object}
+   */
   modal:{},
+
+  /**
+   * tab选项卡的标识
+   * @type {Number}
+   */
   tab:1,
+
+  /**
+   * 所有上传的历史图片，仅限不刷新的历史图片，刷新页面后历史数据清空
+   * @type {Array}
+   */
   historyCache:[],
 
+  /**
+   * 刚刚上传的图片数据
+   * @type {Array}
+   */
+  newHistoryCache:[],
+
+
+  /**
+   * 创建一个覆盖层
+   * 该覆盖层定位在图片上传弹框的下方，可以用来装逼使用，显得特别屌
+   * @return {[type]} [description]
+   */
   createCover:function(){
     this.cover = document.createElement("div");
     this.cover.setAttribute("style","position:fixed;left:0px;top:0px;background:#000;opacity:.6;width:100%;height:100%;z-index:998;");
     document.getElementsByTagName("body")[0].appendChild(this.cover);
   },
 
+  /**
+   * 创建一个modal层
+   * 所有的modal层信息都在这里创建，包括按钮点击功能等
+   * @return {[type]} [description]
+   */
   createModal:function(){
     var _this = this;
     // 添加一个遮罩层
@@ -115,13 +151,17 @@ PASTE = {
     footer.appendChild(btn2);
 
     btn1.onclick = function(){
-      if(_this.tab === 1 || _this.tab === 3){
-        for (var i = 0; i < _this.historyCache.length; i++) {
-          MD.editor.replaceSelection('![image]('+_this.historyCache[i]+')');
+      if(_this.tab === 1){
+        for (var i = 0; i < _this.newHistoryCache.length; i++) {
+          MD.editor.replaceSelection('![image]('+_this.newHistoryCache[i]+')');
         }
       }else if(_this.tab === 2){
         var value = webDiv.getElementsByTagName("input")[0].value;
         MD.editor.replaceSelection('![image]('+value+')');
+      }else if(_this.tab === 3){
+        for (var i = 0; i < _this.historyCache.length; i++) {
+          MD.editor.replaceSelection('![image]('+_this.historyCache[i]+')');
+        }
       }
       _this.hideUpload();
     }
@@ -150,6 +190,8 @@ PASTE = {
     }
 
     uploadDiv.getElementsByTagName("button")[1].onclick = function(){
+      _this.newHistoryCache.splice(0,_this.newHistoryCache.length); // 清空数组
+
       var i = 0;
 
       var timer = setInterval(function(){
@@ -175,7 +217,9 @@ PASTE = {
         //res为文件上传信息
         callback: function(res, index) {
           // 加入历史图片
-          _this.historyCache[index] = res.store_path;
+          _this.historyCache.push(res.store_path); // 全部上传的图片
+          _this.newHistoryCache.push(res.store_path); // 刚刚上传的图片
+
           var img = document.createElement("img");
           img.src = res.store_path;
           img.style.width = "80px";
@@ -203,6 +247,7 @@ PASTE = {
   },
 
   showUpload:function(){
+    this.tab = 1;
     this.createModal();
   },
 
@@ -211,6 +256,11 @@ PASTE = {
     document.body.removeChild(this.cover);
   },
 
+  /**
+   * 上传图片
+   * @param  {[type]} option [description]
+   * @return {[type]}        [description]
+   */
   uploadImg:function(option) {
     var file,
         fd = new FormData(),
@@ -294,6 +344,15 @@ PASTE = {
 
 }
 
+/**
+ * 监听浏览器的粘贴事件
+ * 当发生ctrl+v事件的时候，首先会判断浏览器是否可以粘贴图片，如果可以就执行下面的操作
+ * 其中还会判断粘贴的内容是图片还是HTML或者纯文本的内容
+ * 如果是图片就会把图片下载到本地，如果是纯文本或者HTML就会直接粘贴内容
+ * 如果浏览器不支持就直接return false，执行浏览器本身的粘贴操作
+ * @param  {[type]} event) {             if(MD.isEdit [description]
+ * @return {[type]}        [description]
+ */
 document.addEventListener('paste', function (event) {
   if(MD.isEdit === false){
     return false;
