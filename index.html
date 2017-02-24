@@ -7,16 +7,40 @@
 <body>
 
 <style>
-	.box{margin-top:50px;margin-left:20px;width:1200px;height: 300px;}
+  html,body{margin:0;padding: 0;background: #eff;}
+  .header{width:100%;height: 60px;background: #fff;margin-bottom: 30px;box-shadow: 0 1px 2px 0 rgba(0,0,0,.24);padding:0 30px;}
+  .header span.title a{display: block;float:left;height: 60px;line-height: 60px;font-size:36px;color:#006741;text-decoration: none;}
+  .header span.title a b{color:#000000;}
+  .header nav{float: right;height: 60px;display: inline-block;line-height: 60px;}
+  .header nav ul,.header nav ul li{list-style: none;}
+  .header nav ul{height: 60px;display: block;padding: 0 !important;margin:0 !important;}
+  .header nav ul li{float: left;margin-left:20px;}
+  .header nav ul li a{text-decoration: none;color:#ccc;font-family: "微软雅黑";}
+	.container{width:100%; padding: 0 30px !important;max-width: 1600px;}
 </style>
-	<div class="box">
+  <div class="header">
+    <span class="title"><a href="javascript:;"><b>Markdown</b> Editor</a></span>
+    <nav>
+      <ul>
+        <li><a href="javascript:;">文档</a></li>
+        <li><a href="javascript:;">下载</a></li>
+        <li><a href="javascript:;">GitHub</a></li>
+      </ul>
+    </nav>
+  </div>
+	<div class="container">
 		<script type="text/plain" id="myEditor"></script>
+
+    <h3>功能介绍</h3>
+
+    <hr>
 	</div>
   
   <script src="editor_api.js"></script>
   <script>
     var myEditor = MD.getEditor('myEditor',{
     	name : 'body',
+      markdownHeight : '300px',
     });
   </script>
 </body>

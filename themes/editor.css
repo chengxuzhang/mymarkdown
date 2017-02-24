@@ -16,10 +16,11 @@ body {margin: 0;}
       margin-top:-30px;
       height: 30px;
       width: 100%;
-      border-top:1px solid #eee;
-      border-left:1px solid #eee;
-      border-right: 1px solid #eee;
+      border-top:1px solid #ccc;
+      border-left:1px solid #ccc;
+      border-right: 1px solid #ccc;
       border-radius: 5px 5px 0 0;
+      padding: 0 5px !important;
     }
 
     .markdown-editor .toolsbar ul,.toolsbar ul li{
@@ -60,7 +61,7 @@ body {margin: 0;}
 
     .markdown-editor .toolsbar ul li.tool:hover{
       background: #eff;
-      border-bottom:1px solid #eee;
+      border-bottom:1px solid #ccc;
     }
 
     .markdown-editor .toolsbar ul li.tool:hover span{
@@ -108,9 +109,9 @@ body {margin: 0;}
       line-height: 1.5em;
       background-color: #eff;
       word-break:break-all;
-      border-top:1px solid #eee;
-      border-right:1px solid #eee;
-      border-bottom:1px solid #eee;
+      border-top:1px solid #ccc;
+      border-right:1px solid #ccc;
+      border-bottom:1px solid #ccc;
       border-left:1px solid #ddd;
       border-radius: 0 0 5px 0;
     }

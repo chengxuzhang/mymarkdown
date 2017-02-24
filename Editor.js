@@ -159,6 +159,8 @@ MD = {
         var markdownDiv = document.createElement("div");
         markdownDiv.id = id;
         markdownDiv.className = "markdown-editor";
+        markdownDiv.style.width = config.markdownWidth || "100%";
+        markdownDiv.style.height = config.markdownHeight || "100%";
         this.insertAfter(markdownDiv,document.getElementById(id));
         this.inDiv = document.createElement("div");
         this.inDiv.id = "in";
