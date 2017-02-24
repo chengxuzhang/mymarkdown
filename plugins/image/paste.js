@@ -211,24 +211,44 @@ PASTE = {
         //选择文件后，发送文件前自定义事件
         //file为上传的文件信息，可在此处做文件检测、初始化进度条等动作
         beforeSend: function(file) {
+          // 判断大小
+          if(file.size > MARKDOWN_CONFIG.size){
+            var span = document.createElement("span");
+            span.innerHTML = '图片太大了!';
+            trs[i].getElementsByTagName("td")[1].appendChild(span);
+            return false;
+          }
 
+          // 文件类型
+          if(file.type.indexOf("image") === -1){
+            var span = document.createElement("span");
+            span.innerHTML = '文件类型错误!';
+            trs[i].getElementsByTagName("td")[1].appendChild(span);
+            return false;
+          }
         },
         //文件上传完成后回调函数
         //res为文件上传信息
         callback: function(res, index) {
-          // 加入历史图片
-          _this.historyCache.push(res.store_path); // 全部上传的图片
-          _this.newHistoryCache.push(res.store_path); // 刚刚上传的图片
+          if(res.status == 200){
+            // 加入历史图片
+            _this.historyCache.push(res.store_path); // 全部上传的图片
+            _this.newHistoryCache.push(res.store_path); // 刚刚上传的图片
 
-          var img = document.createElement("img");
-          img.src = res.store_path;
-          img.style.width = "80px";
-          img.style.height = "60px";
-          img.style.cursor = "pointer";
-          img.onclick = function(){
-            MD.editor.replaceSelection('![image]('+res.store_path+')');
+            var img = document.createElement("img");
+            img.src = res.store_path;
+            img.style.width = "80px";
+            img.style.height = "60px";
+            img.style.cursor = "pointer";
+            img.onclick = function(){
+              MD.editor.replaceSelection('![image]('+res.store_path+')');
+            }
+            trs[index].getElementsByTagName("td")[1].appendChild(img);
+          }else{
+            var span = document.createElement("span");
+            span.innerHTML = res.message;
+            trs[index].getElementsByTagName("td")[1].appendChild(span);
           }
-          trs[index].getElementsByTagName("td")[1].appendChild(img);
         },
         //返回上传过程中包括上传进度的相关信息
         //详细请看res,可在此加入进度条相关代码

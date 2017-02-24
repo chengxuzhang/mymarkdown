@@ -2,6 +2,10 @@
 
 class Upload{
 
+    public $size = 5 * 1024 * 1024; // 图片控制在5M
+
+    public $type = ['image/jpg','image/jpeg','image/gif','image/png','image/bmp'];
+
     public function base64_upload() {
         $postData = $_POST;
 
@@ -20,7 +24,7 @@ class Upload{
             $image_file = $this->createDir() . $image_name;
             //服务器文件存储路径
             if (file_put_contents($image_file, base64_decode(str_replace($result[1], '', $base64_image)))){
-                return $image_file;
+                return ['status'=>200,'store_path'=>$image_file];
             }else{
                 return false;
             }
@@ -30,10 +34,20 @@ class Upload{
     }
 
     public function img_upload(){
+        // 判断大小
+        if($_FILES["files"]["size"] > $this->size){
+            return ['status'=>400,'message'=>'文件太大了!'];
+        }
+
+        // 判断类型
+        if(!in_array($_FILES["files"]["type"], $this->type)){
+            return ['status'=>400,'message'=>'文件类型错误!'];
+        }
+        
         $result = explode('.', $_FILES["files"]["name"]);
         $name = $this->generate_string() . '.' . end($result);
         move_uploaded_file($_FILES["files"]["tmp_name"],iconv("UTF-8","gb2312",$this->createDir() . $name));
-        return $this->createDir() . $name;
+        return ['status'=>200,'store_path'=>$this->createDir() . $name];
     }
 
     private function generate_string( $length = 8 ) { 
@@ -72,12 +86,11 @@ $getData = $_GET;
 $upload = new Upload();
 if(isset($getData['type'])){
     if($getData['type'] == 'base64'){
-        $src = $upload->base64_upload();
-        echo json_encode(['store_path'=>$src]);
+        $res = $upload->base64_upload();
     }else if($getData['type'] == 'img'){
-        $src = $upload->img_upload();
-        echo json_encode(['store_path'=>$src]);
+        $res = $upload->img_upload();
     }
+    echo json_encode($res);
 }
 
 

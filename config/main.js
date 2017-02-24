@@ -8,6 +8,8 @@
 		language : 'zh-CN',
 
 		name : 'content', // 表单提交时候的name值
+
+		size : 5 * 1024 * 1024,
 	}
 
 })();
