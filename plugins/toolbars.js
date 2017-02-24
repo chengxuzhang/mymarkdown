@@ -198,7 +198,7 @@ TOOLBARS = {
 					markdownDiv.setAttribute("style","width:100%;height:"+(document.body.scrollHeight-30)+"px;position:fixed;left:0;top:0;");
 					status = 1;
 				}else if(status == 1){
-					markdownDiv.setAttribute("style","");
+					markdownDiv.setAttribute("style","width:"+MD.markdownWidth+";height:"+MD.markdownHeight+";");
 					status = 0;	
 				}
 			}

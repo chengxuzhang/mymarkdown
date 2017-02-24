@@ -21,6 +21,7 @@ body {margin: 0;}
       border-right: 1px solid #ccc;
       border-radius: 5px 5px 0 0;
       padding: 0 5px !important;
+      background: #eff;
     }
 
     .markdown-editor .toolsbar ul,.toolsbar ul li{

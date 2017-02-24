@@ -23,17 +23,58 @@
     <nav>
       <ul>
         <li><a href="javascript:;">文档</a></li>
-        <li><a href="javascript:;">下载</a></li>
-        <li><a href="javascript:;">GitHub</a></li>
+        <li><a href="https://github.com/chengxuzhang/mymarkdown/releases" target="_blank">下载</a></li>
+        <li><a href="https://github.com/chengxuzhang/mymarkdown" target="_blank">GitHub</a></li>
       </ul>
     </nav>
   </div>
 	<div class="container">
 		<script type="text/plain" id="myEditor"></script>
 
+    <h3>介绍</h3>
+
+    <hr>
+    
+    <p>一款功能强大的markdown在线编辑器，使用codemirror做为编辑框，marked.js解析markdown语言</p>
+    <p>编辑器基于bootstrap</p>
+
     <h3>功能介绍</h3>
 
     <hr>
+
+    <p>1.可直接保存文件到本地，可直接ctrl+s保存md或者HTML文件，也可按ctrl+shift+s调出选择框选择下载</p>
+    <p>2.支持图片上传，可一次性传多张图片</p>
+    <p>3.可复制网页图片或QQ截图粘贴，自动下载图片</p>
+    <p>4.可切换编辑模式，共三种模式 编辑模式 预览模式 编辑预览模式，可全屏</p>
+    <p>5.自动保存内容，通过url hash保存的方式，当你进行编辑的时候发现url在发生变化，说明已经保存</p>
+    <p>6.右侧代码可高亮显示，这主要是因为引入了highlight.pack.js</p>
+
+    <h3>使用</h3>
+
+    <hr>
+
+    <p>只需要引入以下代码就可调用编辑器</p>
+    <pre>
+      <code>
+        &lt;script type=&quot;text/plain&quot; id=&quot;myEditor&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;editor_api.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+          var myEditor = MD.getEditor(&#x27;myEditor&#x27;,{
+            name : &#x27;body&#x27;,
+            markdownHeight : &#x27;300px&#x27;,
+          });
+        &lt;/script&gt;
+      </code>
+    </pre>
+
+    <h3>配置说明</h3>
+
+    <hr>
+
+    <p>找到config/main.js 进行配置，配置相对比较简单，去掉复杂的配置，只要简单。</p>
+    <p>main.js中的配置就是所有可以配置的项，增加其他的配置可以自己研究源码</p>
+    <p>调用编辑器的时候有 name markdownWidth 和 markdownHeight三个配置项</p>
+    <p>name 是什么？对，就是表单提交时需要的name，可以自定义。markdownWidth和markdownHeight分别是编辑器的宽和高，默认是100%</p>
 	</div>
   
   <script src="editor_api.js"></script>

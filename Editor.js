@@ -148,6 +148,18 @@ MD = {
      */
     name : MARKDOWN_CONFIG.name,
 
+    /**
+     * 编辑器的宽度
+     * @type {String}
+     */
+    markdownWidth : '100%',
+
+    /**
+     * 编辑器的高度
+     * @type {String}
+     */
+    markdownHeight : '100%',
+
     getEditor:function(id, config){
         if(!config) config = {};
 
@@ -159,8 +171,8 @@ MD = {
         var markdownDiv = document.createElement("div");
         markdownDiv.id = id;
         markdownDiv.className = "markdown-editor";
-        markdownDiv.style.width = config.markdownWidth || "100%";
-        markdownDiv.style.height = config.markdownHeight || "100%";
+        this.markdownWidth = markdownDiv.style.width = config.markdownWidth || "100%";
+        this.markdownHeight = markdownDiv.style.height = config.markdownHeight || "100%";
         this.insertAfter(markdownDiv,document.getElementById(id));
         this.inDiv = document.createElement("div");
         this.inDiv.id = "in";
