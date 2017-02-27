@@ -195,7 +195,7 @@ TOOLBARS = {
 			toolLi.innerHTML = '<span class="iconfont icon-full-screen"></span>';
 			toolLi.onclick = function(){
 				if(status == 0){
-					markdownDiv.setAttribute("style","width:100%;height:"+(document.body.scrollHeight-30)+"px;position:fixed;left:0;top:0;");
+					markdownDiv.setAttribute("style","width:100%;height:"+(document.documentElement.clientHeight-30)+"px;position:fixed;left:0;top:0;");
 					status = 1;
 				}else if(status == 1){
 					markdownDiv.setAttribute("style","width:"+MD.markdownWidth+";height:"+MD.markdownHeight+";");
