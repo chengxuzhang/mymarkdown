@@ -31,6 +31,12 @@ PASTE = {
    */
   newHistoryCache:[],
 
+  /**
+   * 马上就要上传的图片内容
+   * @type {Array}
+   */
+  uploadCache:[],
+
 
   /**
    * 创建一个覆盖层
@@ -175,29 +181,35 @@ PASTE = {
     var trs = [];
 
     fileInput.onchange = function(){
-      if(uploadDiv.getElementsByTagName("table")[0]){
-        uploadDiv.removeChild(uploadDiv.getElementsByTagName("table")[0]);
-      }   
-      var table = document.createElement("table");
-      table.className = "table table-bordered";
-      table.style.marginTop = "10px";
+      var table = uploadDiv.getElementsByTagName("table")[0];
+      if(!table){
+        table = document.createElement("table");
+        table.className = "table table-bordered";
+        table.style.marginTop = "10px";
+      }
       for (var i = 0; i < fileInput.files.length; i++) {
           var tr = document.createElement("tr");
           tr.innerHTML = '<td>'+fileInput.files[i]['name']+'<div style="width:200px;height:16px;position:relative;background:#eff;border-radius:3px;"><span style="position:absolue:left:0;top:0;height:16px;background:blue;width:0%;display:block;border-radius:3px;transition: width 1s;-moz-transition: width 1s;-webkit-transition: width 1s;-o-transition: width 1s;"></span></div></td><td></td>';
-          trs[i] = tr;
+          trs.push(tr);
           table.appendChild(tr);
+          _this.uploadCache.push(fileInput.files[i]);
       }
       uploadDiv.appendChild(table);
     }
 
     uploadDiv.getElementsByTagName("button")[1].onclick = function(){
-      _this.newHistoryCache.splice(0,_this.newHistoryCache.length); // 清空数组
+      // _this.newHistoryCache.splice(0,_this.newHistoryCache.length); // 清空数组
 
       var i = 0;
 
       var timer = setInterval(function(){
+
+      if(_this.uploadCache[i] === 1){
+        i++;
+        return false;
+      }
         
-      if(i>=fileInput.files.length){
+      if(i>=_this.uploadCache.length){
           clearInterval(timer);
           return false;
       }
@@ -207,7 +219,7 @@ PASTE = {
       _this.uploadImg({
         //上传文件接收地址
         uploadUrl: MD.path + "?type=img",
-        file:fileInput.files[i],
+        file:_this.uploadCache[i],
         index:i,
         //选择文件后，发送文件前自定义事件
         //file为上传的文件信息，可在此处做文件检测、初始化进度条等动作
@@ -236,6 +248,7 @@ PASTE = {
               // 加入历史图片
               _this.historyCache.push(res.store_path); // 全部上传的图片
               _this.newHistoryCache.push(res.store_path); // 刚刚上传的图片
+              _this.uploadCache[index] = 1; // 标记已经上传
 
               var img = document.createElement("img");
               img.src = res.store_path;
@@ -271,6 +284,8 @@ PASTE = {
 
   showUpload:function(){
     this.tab = 1;
+    this.uploadCache.splice(0,this.uploadCache.length); // 清空数组
+    this.newHistoryCache.splice(0,this.newHistoryCache.length); // 清空数组
     this.createModal();
   },
 
