@@ -21,27 +21,28 @@
 		'toolbars_FullScreen':'FullScreen',
 
 		'toolbars_tip_msg'   :'Input content',
-		'toolbars_question_msg' : '1.按住ctrl+shift+s可弹出保存选项<br>\
-				2.直接按ctrl+s可直接保存文件<br>\
-				3.加粗可使用 **输入文字内容**<br>\
-				4.斜体可使用 *输入文字内容*<br>\
-				5.链接可使用 [链接文字](http://www.example.com)<br>\
-				6.引用可使用 > 输入文字内容<br>\
-				7.代码可使用 <br>\
+		'toolbars_question_msg' : '1.Press ctrl+shift+s to pop up save options<br>\
+				2.Press ctrl+s to save the file directly<br>\
+				3.Use bold **Enter text content**<br>\
+				4.Use italic *Enter text content*<br>\
+				5.Use link [Link](http://www.example.com)<br>\
+				6.Use quote > Enter text content<br>\
+				7.Use code <br>\
+				```javascript <br>\
+				Enter code <br>\
 				``` <br>\
-				输入代码 <br>\
-				``` <br>\
-				8.图片可使用 ![image](图片地址)<br>\
-				9.数字列表可使用 1.输入文字内容<br>\
-				10.普通列表可使用 - 输入文字内容<br>\
-				11.标题可使用 # 输入文字内容<br>\
-				说明：从h1-h6 分别是# ## ### #### ##### ######<br>\
-				12.分割线可使用 ----------<br>\
-				13.表格可使用<br>\
-				表头1 | 表头2<br>\
+				Tips：Highlight can add language tips as shown in the following.<br>\
+				8.Use image ![image](Image url)<br>\
+				9.Use ul 1.Enter text content<br>\
+				10.Use ol - Enter text content<br>\
+				11.Use title # Enter text content<br>\
+				Explain：h1-h6 => # ## ### #### ##### ######<br>\
+				12.Use hr ----------<br>\
+				13.Use table<br>\
+				header1 | header2<br>\
 				---|---<br>\
-				参数1 | 参数2<br>\
-				14.支持粘贴图片上传功能(直接复制网页图片或者QQ截图)\
+				param1 | param2<br>\
+				14.Support paste image upload function(Direct copy of web images or screenshot)\
 		',
 		'toolbars_table_msg' : 'Header 1 | Header 2\n---|---\nparam1 | param2\nparam1 | param2',
 

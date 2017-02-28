@@ -180,6 +180,7 @@ PASTE = {
       }   
       var table = document.createElement("table");
       table.className = "table table-bordered";
+      table.style.marginTop = "10px";
       for (var i = 0; i < fileInput.files.length; i++) {
           var tr = document.createElement("tr");
           tr.innerHTML = '<td>'+fileInput.files[i]['name']+'<div style="width:200px;height:16px;position:relative;background:#eff;border-radius:3px;"><span style="position:absolue:left:0;top:0;height:16px;background:blue;width:0%;display:block;border-radius:3px;transition: width 1s;-moz-transition: width 1s;-webkit-transition: width 1s;-o-transition: width 1s;"></span></div></td><td></td>';
@@ -231,19 +232,21 @@ PASTE = {
         //res为文件上传信息
         callback: function(res, index) {
           if(res.status == 200){
-            // 加入历史图片
-            _this.historyCache.push(res.store_path); // 全部上传的图片
-            _this.newHistoryCache.push(res.store_path); // 刚刚上传的图片
+            setTimeout(function(){ // 如果上传完成后等待一秒后再显示图片，配合进度条
+              // 加入历史图片
+              _this.historyCache.push(res.store_path); // 全部上传的图片
+              _this.newHistoryCache.push(res.store_path); // 刚刚上传的图片
 
-            var img = document.createElement("img");
-            img.src = res.store_path;
-            img.style.width = "80px";
-            img.style.height = "60px";
-            img.style.cursor = "pointer";
-            img.onclick = function(){
-              MD.editor.replaceSelection('![image]('+res.store_path+')');
-            }
-            trs[index].getElementsByTagName("td")[1].appendChild(img);
+              var img = document.createElement("img");
+              img.src = res.store_path;
+              img.style.width = "80px";
+              img.style.height = "60px";
+              img.style.cursor = "pointer";
+              img.onclick = function(){
+                MD.editor.replaceSelection('![image]('+res.store_path+')');
+              }
+              trs[index].getElementsByTagName("td")[1].appendChild(img);
+            },1000);
           }else{
             var span = document.createElement("span");
             span.innerHTML = res.message;
