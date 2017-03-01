@@ -208,6 +208,10 @@ PASTE = {
         i++;
         return false;
       }
+
+      if(MARKDOWN_CONFIG.count < 1){
+        return false;
+      }
         
       if(i>=_this.uploadCache.length){
           clearInterval(timer);
@@ -239,6 +243,8 @@ PASTE = {
             trs[i].getElementsByTagName("td")[1].appendChild(span);
             return false;
           }
+
+          MARKDOWN_CONFIG.count--;
         },
         //文件上传完成后回调函数
         //res为文件上传信息
@@ -259,6 +265,8 @@ PASTE = {
                 MD.editor.replaceSelection('![image]('+res.store_path+')');
               }
               trs[index].getElementsByTagName("td")[1].appendChild(img);
+
+              MARKDOWN_CONFIG.count++;
             },1000);
           }else{
             var span = document.createElement("span");
